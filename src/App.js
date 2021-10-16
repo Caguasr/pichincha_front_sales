@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { ThemeProvider } from "@mui/material";
+import Routes from "./routes";
+import theme from "./theme";
+import LayoutComponent from "./layout/LayoutComponent";
+import { BrowserRouter as Router } from "react-router-dom";
+import SupplierState from "./context/SupplierContext.js/SupplierState";
+import { SnackbarProvider } from "notistack";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ThemeProvider theme={theme}>
+      <Router>
+        <SnackbarProvider
+          maxSnack={3}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <LayoutComponent>
+            <SupplierState>
+              <Routes />
+            </SupplierState>
+          </LayoutComponent>
+        </SnackbarProvider>
+      </Router>
+    </ThemeProvider>
   );
 }
 
