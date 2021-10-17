@@ -89,7 +89,7 @@ const SupplierView = () => {
         <Grid item xs={12} container>
           <Grid item xs={6}>
             <Typography style={{ fontWeight: "bold" }} variant="h5">
-              Gestion de prooveedores
+              Gestión de proveedores
             </Typography>
           </Grid>
           <Grid item xs={6} container justifyContent="flex-end">
@@ -98,7 +98,7 @@ const SupplierView = () => {
               color="secondary"
               onClick={handleSupplierCreate}
             >
-              Agregar Proovedor
+              Agregar Proveedor
             </Button>
           </Grid>
         </Grid>

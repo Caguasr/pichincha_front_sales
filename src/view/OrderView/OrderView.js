@@ -93,7 +93,7 @@ const OrderView = () => {
           </Grid>
           <Grid item xs={6}>
             <Card style={{ padding: 20 }}>
-              <CardHeader title="Mi carrito" />
+              <CardHeader title="Mi pedido" />
               <CardContent>
                 <List>
                   {detail.map((e) => (

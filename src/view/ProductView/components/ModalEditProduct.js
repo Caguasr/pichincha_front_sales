@@ -31,7 +31,7 @@ const ModalEditSupplier = ({ open, setOpen, product }) => {
   }, [product]);
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
-      <DialogTitle>Editar Proovedor</DialogTitle>
+      <DialogTitle>Editar Producto</DialogTitle>
       <DialogContent style={{ padding: 20 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>

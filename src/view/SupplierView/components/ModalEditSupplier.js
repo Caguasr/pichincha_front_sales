@@ -28,12 +28,12 @@ const ModalEditSupplier = ({ open, setOpen, supplier }) => {
   }, [supplier]);
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
-      <DialogTitle>Editar Proovedor</DialogTitle>
+      <DialogTitle>Editar Proveedor</DialogTitle>
       <DialogContent style={{ padding: 20 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              label="Nombre proovedor"
+              label="Nombre proveedor"
               value={nameSupplier}
               onChange={(e) => setNameSupplier(e.target.value)}
               fullWidth

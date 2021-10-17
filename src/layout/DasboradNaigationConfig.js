@@ -12,7 +12,7 @@ export const DasboardNaviationConfig = [
     icon: <Add />,
   },
   {
-    name: "Proovedores",
+    name: "Proveedores",
     link: "/supplier",
     icon: <Groups />,
   },
