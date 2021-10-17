@@ -6,9 +6,11 @@ import {
   CREATE_PRODUCT,
   DELETE_PRODUCT,
   GET_CUSTOMERS,
+  GET_ORDER_BY_DATE,
   GET_SUPPLIERS,
   SELECT_SUPPLIER,
   UPDATE_SUPPLIER,
+  PROUCT_STOCK,
 } from "../types";
 import { useSnackbar } from "notistack";
 const SupplierState = (props) => {
@@ -17,6 +19,8 @@ const SupplierState = (props) => {
     suppliers: [],
     select: {},
     customers: [],
+    ordersByDate: [],
+    inStock: [],
   };
 
   const [state, dispatch] = useReducer(SupplierReducer, initialState);
@@ -69,6 +73,7 @@ const SupplierState = (props) => {
       payload: supplier,
     });
   };
+
   const updateProduct = async (data) => {
     try {
       await httpConfig.put(`/product/${data.id}`, data);
@@ -90,7 +95,7 @@ const SupplierState = (props) => {
     try {
       await httpConfig.delete(`/order/${id}`);
       await getCustomers();
-      enqueueSnackbar("Factura eliminada correctamente", {
+      enqueueSnackbar("Pedido eliminada correctamente", {
         variant: "success",
       });
     } catch (error) {
@@ -165,12 +170,44 @@ const SupplierState = (props) => {
     }
   };
 
+  const findByDate = async (data) => {
+    try {
+      const res = await httpConfig.get(`/order/${data.since}/${data.until}`);
+      dispatch({
+        type: GET_ORDER_BY_DATE,
+        payload: res.data,
+      });
+    } catch (error) {
+      enqueueSnackbar("Algo salió mal intentalo más tarde", {
+        variant: "error",
+      });
+      console.log(error.response);
+    }
+  };
+  const getStockProduct = async (supplier) => {
+    try {
+      const { product, ...rest } = supplier;
+      const res = await httpConfig.post(`/product/stock`, { ...rest });
+      dispatch({
+        type: PROUCT_STOCK,
+        payload: res.data,
+      });
+    } catch (error) {
+      enqueueSnackbar("Algo salió mal intentalo más tarde", {
+        variant: "error",
+      });
+      console.log(error.response);
+    }
+  };
+
   return (
     <SupplierContext.Provider
       value={{
         suppliers: state.suppliers,
         select: state.select,
         customers: state.customers,
+        ordersByDate: state.ordersByDate,
+        inStock: state.inStock,
         getSuppliers,
         updateSupplier,
         createSupplier,
@@ -181,6 +218,8 @@ const SupplierState = (props) => {
         getCustomers,
         createOrder,
         deleteOrder,
+        findByDate,
+        getStockProduct,
       }}
     >
       {props.children}

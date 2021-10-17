@@ -3,7 +3,9 @@ import {
   CREATE_PRODUCT,
   DELETE_PRODUCT,
   GET_CUSTOMERS,
+  GET_ORDER_BY_DATE,
   GET_SUPPLIERS,
+  PROUCT_STOCK,
   SELECT_SUPPLIER,
   UPDATE_PRODUCT,
 } from "../types";
@@ -19,6 +21,7 @@ export default function (state, action) {
       return {
         ...state,
         select: action.payload,
+        inStock: [],
       };
     case UPDATE_PRODUCT:
       return {
@@ -50,6 +53,17 @@ export default function (state, action) {
       return {
         ...state,
         customers: action.payload,
+      };
+    case GET_ORDER_BY_DATE:
+      return {
+        ...state,
+        ordersByDate: action.payload,
+      };
+    case PROUCT_STOCK:
+      return {
+        ...state,
+        inStock: action.payload,
+        select: {},
       };
     default:
       return state;

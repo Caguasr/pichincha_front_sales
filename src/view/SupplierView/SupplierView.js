@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Edit, Visibility } from "@mui/icons-material";
+import { Edit, LocalGroceryStore, Visibility } from "@mui/icons-material";
 import { Grid, Typography, IconButton, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useContext, useEffect, useState } from "react";
@@ -9,18 +9,18 @@ import ModalCreateSupplier from "./components/ModalCreateSupplier";
 import ModalEditSupplier from "./components/ModalEditSupplier";
 
 const SupplierView = () => {
-  const { suppliers, getSuppliers, getSelectSupplier } =
+  const { suppliers, getSuppliers, getSelectSupplier, getStockProduct } =
     useContext(SupplierContext);
   const columns = [
     { field: "id", headerName: "ID", width: 130 },
     { field: "ruc", headerName: "Ruc", width: 200 },
     { field: "name", headerName: "Nombre", width: 200 },
-    { field: "createdAt", headerName: "Creado", width: 200 },
-    { field: "updateAt", headerName: "Actualizado", width: 200 },
+    { field: "createdAt", headerName: "Creado", width: 150 },
+    { field: "updateAt", headerName: "Actualizado", width: 150 },
     {
-      field: "id",
-      headerName: "Ver productos",
-      width: 200,
+      field: "todos",
+      headerName: "Productos",
+      width: 130,
       renderCell: (params) => (
         <IconButton
           onClick={() => handleShowProducts(params.row)}
@@ -31,9 +31,22 @@ const SupplierView = () => {
       ),
     },
     {
+      field: "stock",
+      headerName: "En stock",
+      width: 130,
+      renderCell: (params) => (
+        <IconButton
+          onClick={() => handleProductsStock(params.row)}
+          color="secondary"
+        >
+          <LocalGroceryStore />
+        </IconButton>
+      ),
+    },
+    {
       field: "actions",
       headerName: "Editar",
-      width: 200,
+      width: 130,
       renderCell: (params) => (
         <IconButton
           onClick={() => handleSupplierEdit(params.row)}
@@ -60,6 +73,10 @@ const SupplierView = () => {
   const handleShowProducts = (supplier) => {
     history.push("/supplier/products");
     getSelectSupplier(supplier);
+  };
+  const handleProductsStock = (supplier) => {
+    history.push("/supplier/products");
+    getStockProduct(supplier);
   };
 
   useEffect(() => {

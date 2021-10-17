@@ -8,7 +8,7 @@ import ModalCreateSupplier from "./components/ModalCreateProduct";
 import ModalEditSupplier from "./components/ModalEditProduct";
 
 const ProductView = () => {
-  const { select, deleteProduct } = useContext(SupplierContext);
+  const { select, deleteProduct, inStock } = useContext(SupplierContext);
   const columns = [
     { field: "id", headerName: "ID", width: 130 },
     { field: "name", headerName: "Nombre", width: 200 },
@@ -77,7 +77,7 @@ const ProductView = () => {
         <Grid item xs={12}>
           <div style={{ height: 400, width: "100%" }}>
             <DataGrid
-              rows={select.product}
+              rows={inStock.length > 0 ? inStock : select.product}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}
