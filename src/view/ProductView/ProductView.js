@@ -8,7 +8,7 @@ import ModalCreateSupplier from "./components/ModalCreateProduct";
 import ModalEditSupplier from "./components/ModalEditProduct";
 
 const ProductView = () => {
-  const { select } = useContext(SupplierContext);
+  const { select, deleteProduct } = useContext(SupplierContext);
   const columns = [
     { field: "id", headerName: "ID", width: 130 },
     { field: "name", headerName: "Nombre", width: 200 },
@@ -20,7 +20,10 @@ const ProductView = () => {
       headerName: "Eliminar",
       width: 200,
       renderCell: (params) => (
-        <IconButton onClick={() => console.log(params.id)} color="secondary">
+        <IconButton
+          onClick={() => deleteProduct(params.row.id)}
+          color="secondary"
+        >
           <Delete />
         </IconButton>
       ),
@@ -87,7 +90,11 @@ const ProductView = () => {
         setOpen={setOpen}
         product={supplierSelct}
       />
-      <ModalCreateSupplier open={openCreate} setOpen={setOpenCreate} />
+      <ModalCreateSupplier
+        open={openCreate}
+        setOpen={setOpenCreate}
+        supplier={select}
+      />
     </>
   );
 };

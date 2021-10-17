@@ -1,5 +1,5 @@
 import { Switch, Route } from "react-router-dom";
-import { HomeView, ProductView } from "./view";
+import { CustomerView, HomeView, OrderView, ProductView } from "./view";
 import SupplierView from "./view/SupplierView/SupplierView";
 
 const Routes = () => {
@@ -8,6 +8,8 @@ const Routes = () => {
       <Route exact path="/" component={HomeView} />
       <Route exact path="/supplier" component={SupplierView} />
       <Route exact path="/supplier/products" component={ProductView} />
+      <Route exact path="/customer" component={CustomerView} />
+      <Route exact path="/order" component={OrderView} />
     </Switch>
   );
 };

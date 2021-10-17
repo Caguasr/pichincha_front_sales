@@ -11,9 +11,9 @@ import { useContext, useEffect, useState } from "react";
 import SupplierContext from "../../../context/SupplierContext.js/SupplierContext";
 
 const ModalEditSupplier = ({ open, setOpen, product }) => {
-  const [nameProduct, setNameProduct] = useState(product.name);
-  const [priceProduct, setPriceProduct] = useState(product.ruc);
-  const [stockProduct, setStockProduct] = useState(product.ruc);
+  const [nameProduct, setNameProduct] = useState("");
+  const [priceProduct, setPriceProduct] = useState("");
+  const [stockProduct, setStockProduct] = useState("");
   const { updateProduct } = useContext(SupplierContext);
   const handelUpdate = async () => {
     product.name = nameProduct;
@@ -46,7 +46,7 @@ const ModalEditSupplier = ({ open, setOpen, product }) => {
 
           <Grid item xs={12}>
             <TextField
-              label="Price"
+              label="Precio"
               value={priceProduct}
               onChange={(e) => setPriceProduct(e.target.value)}
               fullWidth
@@ -56,7 +56,7 @@ const ModalEditSupplier = ({ open, setOpen, product }) => {
 
           <Grid item xs={12}>
             <TextField
-              label="Price"
+              label="Stok"
               value={stockProduct}
               onChange={(e) => setStockProduct(e.target.value)}
               fullWidth
