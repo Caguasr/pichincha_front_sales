@@ -159,7 +159,8 @@ const SupplierState = (props) => {
   const createOrder = async (data) => {
     try {
       await httpConfig.post(`/order`, data);
-      enqueueSnackbar("Order creada correctamente", {
+      await getCustomers();
+      enqueueSnackbar("Pedido creado correctamente", {
         variant: "success",
       });
     } catch (error) {
@@ -173,6 +174,11 @@ const SupplierState = (props) => {
   const findByDate = async (data) => {
     try {
       const res = await httpConfig.get(`/order/${data.since}/${data.until}`);
+      if (res.data.length === 0) {
+        enqueueSnackbar("No se encontraron resultados", {
+          variant: "error",
+        });
+      }
       dispatch({
         type: GET_ORDER_BY_DATE,
         payload: res.data,
